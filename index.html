@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire Utilisateur</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="form-container">
+        <form id="userForm">
+            <h2>Informations Utilisateur</h2>
+            
+            <label for="firstName">Prénom:</label>
+            <input type="text" id="firstName" name="firstName" required>
+
+            <label for="email">Adresse e-mail:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="phoneType">Type de téléphone (facultatif):</label>
+            <input type="text" id="phoneType" name="phoneType">
+
+            <label for="age">Âge:</label>
+            <input type="number" id="age" name="age" min="0" required>
+
+            <button type="submit">Envoyer</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('userForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const data = {
+                firstName: document.getElementById('firstName').value,
+                email: document.getElementById('email').value,
+                phoneType: document.getElementById('phoneType').value || null,
+                age: document.getElementById('age').value
+            };
+
+            fetch('https://hook.eu1.make.com/5gg09ule5duveuo6qpnl0w56ljh8y99v', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erreur réseau');
+                }
+                return response.text();
+            })
+            .then(text => {
+                console.log(text);
+                alert('Informations envoyées avec succès!');
+                document.getElementById('userForm').reset(); // Réinitialise le formulaire après envoi
+            })
+            .catch(error => {
+                alert('Erreur lors de l\'envoi des informations');
+                console.error('Erreur:', error);
+            });
+        });
+    </script>
+</body>
+</html>
