@@ -17,8 +17,12 @@
             <label for="email">Adresse e-mail:</label>
             <input type="email" id="email" name="email" required>
 
-            <label for="phoneType">Type de téléphone (facultatif):</label>
-            <input type="text" id="phoneType" name="phoneType">
+            <label for="phoneType">Type de téléphone :</label>
+            <select id="phoneType" name="phoneType">
+                <option value="">Sélectionnez un type</option>
+                <option value="Iphone">iPhone</option>
+                <option value="Android">Android</option>
+            </select>
 
             <label for="age">Âge:</label>
             <input type="number" id="age" name="age" min="0" required>
@@ -38,7 +42,7 @@
                 age: document.getElementById('age').value
             };
 
-            fetch('https://hook.eu1.make.com/5gg09ule5duveuo6qpnl0w56ljh8y99v', {
+            fetch('https://hook.eu1.make.com/u6vhe5lorh0xmessqcrymcqvqlj24b5j', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
